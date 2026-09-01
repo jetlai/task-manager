@@ -18,11 +18,21 @@ A full-stack task management app with user authentication.
 - **Auth:** bcrypt, express-session
 
 ## Running locally
-\`\`\`bash
+```bash
 git clone https://github.com/YOUR-USERNAME/task-manager.git
+```
+```bash
 cd task-manager
+```
+```bash
 npm install
+```
+```bash
 cp .env.example .env   # then fill in your own SESSION_SECRET
+```
+```bash
 npm run dev
-\`\`\`
+```
+```bash
 Visit http://localhost:3000
+```
