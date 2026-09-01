@@ -15,6 +15,17 @@ app.use(session({
   saveUninitialized: false
 }));
 
+const fs = require('fs');
+
+app.get('/debug-files', (req, res) => {
+  try {
+    const files = fs.readdirSync(path.join(__dirname, 'public'));
+    res.json({ found: true, files });
+  } catch (err) {
+    res.json({ found: false, error: err.message });
+  }
+});
+
 // Middleware: blocks the request unless someone is logged in
 function requireAuth(req, res, next) {
   if (!req.session.userId) {
