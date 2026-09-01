@@ -7,26 +7,52 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="dashboard">
-    <div class="dashboard-header">
-      <h1>My Tasks</h1>
-      <button id="logout-btn">Log Out</button>
-    </div>
+  <div class="page-shell dashboard-shell">
+    <aside class="sidebar-panel">
+      <div>
+        <div class="brand-block">
+          <div class="brand-mark">T</div>
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1>JetFlow</h1>
+          </div>
+        </div>
 
-    <form class="task-form" id="task-form">
-      <input type="text" id="task-title" placeholder="Task title" required>
-      <select id="task-category">
-        <option value="general">General</option>
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-      </select>
-      <input type="date" id="task-due">
-      <button type="submit">Add Task</button>
-    </form>
+        <div class="summary-card">
+          <p class="eyebrow">Today</p>
+          <h2 id="task-summary">0 tasks</h2>
+        </div>
+      </div>
 
-    <div id="task-list">
-    </div>
+      <div class="sidebar-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
+        <button id="logout-btn" class="logout-btn">Log out</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-panel">
+      <div class="dashboard-header">
+        <div>
+          <p class="eyebrow">Overview</p>
+          <h2>My Tasks</h2>
+        </div>
+      </div>
+
+      <form class="task-form" id="task-form">
+        <input type="text" id="task-title" placeholder="Add a new task" required>
+        <select id="task-category">
+          <option value="general">General</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+        </select>
+        <input type="date" id="task-due">
+        <button type="submit">Add task</button>
+      </form>
+
+      <div id="task-list" class="task-list" aria-live="polite"></div>
+    </main>
   </div>
 <script src="dashboard.js"></script>
+<script src="theme.js"></script>
 </body>
 </html>

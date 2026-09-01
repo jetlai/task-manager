@@ -6,20 +6,36 @@
   <title>Task Manager - Register</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="auth-container">
-    <h1>Task Manager</h1>
-    <form id="register-form">
-      <h2>Create Account</h2>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Register</button>
-      <p>Already have an account? <a href="index.html">Log in</a></p>
-    </form>
+<body class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-panel">
+      <div class="brand-block">
+        <div class="brand-mark">T</div>
+        <div>
+          <p class="eyebrow">Productivity</p>
+          <h1>TaskFlow</h1>
+        </div>
+      </div>
+
+      <form id="register-form" class="auth-form">
+        <div class="form-heading">
+          <h2>Create account</h2>
+          <p>Start organizing your day in a smarter way.</p>
+        </div>
+
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" placeholder="Jordan Lee" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a secure password" required>
+
+        <button type="submit">Create account</button>
+        <p class="auth-link">Already have an account? <a href="index.html">Log in</a></p>
+      </form>
+    </div>
   </div>
 <script src="register.js"></script>
 </body>
