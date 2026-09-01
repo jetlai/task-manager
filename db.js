@@ -3,16 +3,25 @@ const path = require('path');
 
 const db = new Database(path.join(__dirname, 'tasks.db'));
 
-// Runs once = creates the table only if it doesn't already exist 
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+  )
+`);
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS tasks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     category TEXT DEFAULT 'general',
     due TEXT,
-    completed INTEGER DEFAULT 0
-    )
-`); 
+    completed INTEGER DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  )
+`);
 
 module.exports = db;
-
