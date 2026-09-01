@@ -1,3 +1,28 @@
-# task-manager 
+# Task Manager
 
-Task manager project start on 8/8/2026
+A full-stack task management app with user authentication.
+
+**Live demo:** https://your-actual-render-url.onrender.com
+
+## Features
+- User registration and login with hashed passwords (bcrypt)
+- Session-based authentication
+- Create, read, update, and delete tasks
+- Tasks scoped per user, with categories and due dates
+- Responsive design
+
+## Tech stack
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js, Express
+- **Database:** SQLite (better-sqlite3)
+- **Auth:** bcrypt, express-session
+
+## Running locally
+\`\`\`bash
+git clone https://github.com/YOUR-USERNAME/task-manager.git
+cd task-manager
+npm install
+cp .env.example .env   # then fill in your own SESSION_SECRET
+npm run dev
+\`\`\`
+Visit http://localhost:3000

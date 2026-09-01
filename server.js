@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bcrypt = require('bcrypt');
@@ -5,15 +6,14 @@ const session = require('express-session');
 const db = require('./db');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(session({
-  secret: 'change-this-to-something-random-later',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware: blocks the request unless someone is logged in
 function requireAuth(req, res, next) {
