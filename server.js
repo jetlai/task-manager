@@ -1,68 +1,63 @@
 const express = require('express');
 const path = require('path');
+const db = require('./db');
 
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(express.json()); // lets us read JSON from request bodies
-app.use(express.static(path.join(__dirname, 'public'))); // serves your HTML/CSS files
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Temporary in-memory "database" 
-let tasks = [
-  { id: 1, title: 'Learn Express basics', category: 'work', due: '2026-08-10', completed: false },
-  { id: 2, title: 'Buy groceries', category: 'personal', due: '2026-08-08', completed: false }
-];
-let nextId = 3;
-
-// GET all tasks
 app.get('/api/tasks', (req, res) => {
+  const tasks = db.prepare('SELECT * FROM tasks').all();
   res.json(tasks);
 });
 
-// GET a single task by id
 app.get('/api/tasks/:id', (req, res) => {
-  const task = tasks.find(t => t.id === parseInt(req.params.id));
+  const task = db.prepare('SELECT * FROM tasks WHERE id = ?').get(req.params.id);
   if (!task) return res.status(404).json({ error: 'Task not found' });
   res.json(task);
 });
 
-// POST create a new task
 app.post('/api/tasks', (req, res) => {
   const { title, category, due } = req.body;
   if (!title) return res.status(400).json({ error: 'Title is required' });
 
-  const newTask = {
-    id: nextId++,
-    title,
-    category: category || 'general',
-    due: due || null,
-    completed: false
-  };
-  tasks.push(newTask);
+  const result = db.prepare(
+    'INSERT INTO tasks (title, category, due) VALUES (?, ?, ?)'
+  ).run(title, category || 'general', due || null);
+
+  const newTask = db.prepare('SELECT * FROM tasks WHERE id = ?').get(result.lastInsertRowid);
   res.status(201).json(newTask);
 });
 
-// PUT update a task (e.g. mark complete, edit title)
 app.put('/api/tasks/:id', (req, res) => {
-  const task = tasks.find(t => t.id === parseInt(req.params.id));
+  const task = db.prepare('SELECT * FROM tasks WHERE id = ?').get(req.params.id);
   if (!task) return res.status(404).json({ error: 'Task not found' });
 
   const { title, category, due, completed } = req.body;
-  if (title !== undefined) task.title = title;
-  if (category !== undefined) task.category = category;
-  if (due !== undefined) task.due = due;
-  if (completed !== undefined) task.completed = completed;
+  db.prepare(`
+    UPDATE tasks SET
+      title = COALESCE(?, title),
+      category = COALESCE(?, category),
+      due = COALESCE(?, due),
+      completed = COALESCE(?, completed)
+    WHERE id = ?
+  `).run(
+    title ?? null,
+    category ?? null,
+    due ?? null,
+    completed !== undefined ? (completed ? 1 : 0) : null,
+    req.params.id
+  );
 
-  res.json(task);
+  const updated = db.prepare('SELECT * FROM tasks WHERE id = ?').get(req.params.id);
+  res.json(updated);
 });
 
-// DELETE a task
 app.delete('/api/tasks/:id', (req, res) => {
-  const index = tasks.findIndex(t => t.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).json({ error: 'Task not found' });
-
-  tasks.splice(index, 1);
+  const result = db.prepare('DELETE FROM tasks WHERE id = ?').run(req.params.id);
+  if (result.changes === 0) return res.status(404).json({ error: 'Task not found' });
   res.status(204).send();
 });
 
