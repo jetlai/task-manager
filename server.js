@@ -12,6 +12,8 @@ const resetRequestTimes = new Map();
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const namePattern = /^[\p{L}\p{M}][\p{L}\p{M}' .-]*$/u;
 
+app.set('trust proxy', 1);
+
 function hashToken(token) {
   return crypto.createHash('sha256').update(token).digest('hex');
 }
