@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Manager - Dashboard</title>
+  <title>JetFlow - Dashboard</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,14 +19,32 @@
           </div>
         </div>
 
-        <div class="summary-card">
-          <p class="eyebrow">Today</p>
-          <h2 id="task-summary">0 tasks</h2>
+        <div class="summary-stack">
+          <div class="summary-card summary-card-primary">
+            <p class="eyebrow">Total active</p>
+            <h2 id="task-summary">0</h2>
+            <span>Keep the momentum going</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <span class="metric-icon">◎</span>
+              <div><strong id="due-today-count">0</strong><span>Due today</span></div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">↗</span>
+              <div><strong id="due-soon-count">0</strong><span>Due soon</span></div>
+            </div>
+            <div class="metric-card metric-card-alert">
+              <span class="metric-icon">!</span>
+              <div><strong id="overdue-count">0</strong><span>Overdue</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="sidebar-actions">
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
+        <a class="settings-btn" href="settings.html" aria-label="Open settings" title="Settings">⚙</a>
         <button id="logout-btn" class="logout-btn">Log out</button>
       </div>
     </aside>
@@ -48,6 +67,26 @@
         <input type="date" id="task-due">
         <button type="submit">Add task</button>
       </form>
+
+      <div class="task-toolbar">
+        <input type="search" id="task-search" placeholder="Search tasks" aria-label="Search tasks">
+        <select id="task-status" aria-label="Filter by status">
+          <option value="all">All status</option>
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+        </select>
+        <select id="task-filter-category" aria-label="Filter by category">
+          <option value="all">All categories</option>
+          <option value="general">General</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+        </select>
+        <select id="task-sort" aria-label="Sort tasks">
+          <option value="created">Newest first</option>
+          <option value="due">Due date</option>
+          <option value="priority">Active first</option>
+        </select>
+      </div>
 
       <div id="task-list" class="task-list" aria-live="polite"></div>
     </main>

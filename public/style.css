@@ -68,6 +68,39 @@ button, input, select {
   width: min(100%, 420px);
 }
 
+.auth-message {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 10;
+  width: min(calc(100% - 32px), 420px);
+  padding: 14px 18px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -16px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  font-weight: 600;
+}
+
+.auth-message.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.auth-message.error {
+  background: var(--danger-soft);
+  border-color: rgba(234, 90, 90, 0.28);
+  color: var(--danger);
+}
+.auth-message.success {
+  background: var(--success-soft);
+  border-color: rgba(28, 167, 119, 0.28);
+  color: var(--success);
+}
+
 .auth-panel {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -161,6 +194,7 @@ button, input, select {
 .logout-btn,
 .theme-toggle,
 .toggle-btn,
+.edit-btn,
 .delete-btn {
   border: none;
   border-radius: 12px;
@@ -178,11 +212,17 @@ button, input, select {
   box-shadow: 0 18px 30px rgba(91, 92, 230, 0.2);
 }
 
+.auth-form button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .auth-form button:hover,
 .task-form button:hover,
 .logout-btn:hover,
 .theme-toggle:hover,
 .toggle-btn:hover,
+.edit-btn:hover,
 .delete-btn:hover {
   transform: translateY(-1px);
 }
@@ -198,6 +238,12 @@ button, input, select {
   color: var(--primary);
   text-decoration: none;
   font-weight: 600;
+}
+.forgot-link {
+  color: var(--primary);
+  font-size: 0.85rem;
+  text-align: right;
+  text-decoration: none;
 }
 
 .page-shell {
@@ -250,6 +296,50 @@ button, input, select {
   font-size: 1.8rem;
 }
 
+.summary-card-primary span,
+.metric-card span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.summary-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.metric-icon {
+  display: none;
+}
+
+.metric-card div {
+  display: grid;
+  gap: 2px;
+}
+
+.metric-card strong {
+  font-size: 1.1rem;
+}
+
+.metric-card-alert .metric-icon,
+.due-overdue {
+  color: var(--danger) !important;
+}
+
 .logout-btn {
   flex: 1;
   background: var(--danger-soft);
@@ -258,8 +348,119 @@ button, input, select {
   font-weight: 600;
 }
 
+.settings-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
 .dashboard-panel {
   padding: 24px;
+}
+
+.settings-shell {
+  display: block;
+  max-width: 680px;
+}
+
+.settings-panel {
+  padding: 30px;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.back-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.settings-form {
+  display: grid;
+  gap: 12px;
+}
+
+.settings-form h3 {
+  margin-top: 18px;
+  font-size: 1rem;
+}
+
+.settings-help {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.settings-form label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.settings-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.settings-form input:focus {
+  outline: none;
+  border-color: rgba(91, 92, 230, 0.55);
+  box-shadow: 0 0 0 4px rgba(91, 92, 230, 0.08);
+}
+
+.settings-form button {
+  margin-top: 12px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary) 0%, #7a5cff 100%);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.settings-form button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.settings-message {
+  margin-bottom: 16px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  display: none;
+  font-weight: 600;
+}
+
+.settings-message.is-visible {
+  display: block;
+}
+
+.settings-message.success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.settings-message.error {
+  background: var(--danger-soft);
+  color: var(--danger);
 }
 
 .dashboard-header {
@@ -302,6 +503,30 @@ button, input, select {
   font-weight: 700;
   min-width: 120px;
   box-shadow: 0 14px 28px rgba(91, 92, 230, 0.18);
+}
+
+.task-toolbar {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 135px 155px 145px;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.task-toolbar input,
+.task-toolbar select {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.task-toolbar input:focus,
+.task-toolbar select:focus {
+  outline: none;
+  border-color: rgba(91, 92, 230, 0.55);
+  box-shadow: 0 0 0 4px rgba(91, 92, 230, 0.08);
 }
 
 .task-list {
@@ -360,6 +585,17 @@ button, input, select {
   font-size: 0.8rem;
 }
 
+.due-status {
+  font-weight: 600;
+}
+
+.due-overdue { color: var(--danger); }
+.due-today { color: var(--primary); }
+.due-soon { color: var(--success); }
+.due-complete { color: var(--success); }
+.due-none,
+.due-upcoming { color: var(--muted); }
+
 .task-badge {
   display: inline-flex;
   align-items: center;
@@ -382,7 +618,33 @@ button, input, select {
   flex-shrink: 0;
 }
 
+.edit-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) 140px 150px auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-form input,
+.edit-form select {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.edit-form input:focus,
+.edit-form select:focus {
+  outline: none;
+  border-color: rgba(91, 92, 230, 0.55);
+  box-shadow: 0 0 0 4px rgba(91, 92, 230, 0.08);
+}
+
 .toggle-btn,
+.edit-btn,
 .delete-btn {
   padding: 9px 12px;
   font-weight: 600;
@@ -391,6 +653,30 @@ button, input, select {
 .toggle-btn {
   background: var(--success-soft);
   color: var(--success);
+}
+
+.edit-btn {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.save-btn,
+.cancel-btn {
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  padding: 9px 12px;
+  font-weight: 600;
+}
+
+.save-btn {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.cancel-btn {
+  background: var(--danger-soft);
+  color: var(--danger);
 }
 
 .delete-btn {
@@ -430,7 +716,19 @@ button, input, select {
     align-items: stretch;
   }
 
+  .edit-form {
+    grid-template-columns: 1fr;
+  }
+
+  .task-toolbar {
+    grid-template-columns: 1fr;
+  }
+
   .task-actions {
     justify-content: flex-end;
+  }
+
+  .settings-panel {
+    padding: 22px 18px;
   }
 }

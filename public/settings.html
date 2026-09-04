@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JetFlow - Settings</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-shell settings-shell">
+    <section class="settings-panel">
+      <div class="settings-header">
+        <a class="back-link" href="dashboard.html">← Back</a>
+        <div>
+          <p class="eyebrow">Account</p>
+          <h1>Settings</h1>
+        </div>
+      </div>
+
+      <div id="settings-message" class="settings-message" role="status" aria-live="polite"></div>
+
+      <form id="settings-form" class="settings-form">
+        <h3>Profile details</h3>
+        <label for="name">Full name</label>
+        <input type="text" id="name" maxlength="80" autocomplete="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" maxlength="254" autocomplete="email" required>
+
+        <h3>Change password</h3>
+        <p class="settings-help">Leave the new password fields blank to keep your current password.</p>
+        <label for="current-password">Current password</label>
+        <input type="password" id="current-password" maxlength="128" autocomplete="current-password">
+        <label for="new-password">New password</label>
+        <input type="password" id="new-password" maxlength="128" autocomplete="new-password">
+        <label for="confirm-password">Confirm new password</label>
+        <input type="password" id="confirm-password" maxlength="128" autocomplete="new-password">
+
+        <button type="submit">Save changes</button>
+      </form>
+    </section>
+  </main>
+  <script src="settings.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>

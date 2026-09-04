@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>JetFlow - Reset Password</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <div id="auth-message" class="auth-message" role="status" aria-live="polite"></div>
+  <div class="auth-shell">
+    <div class="auth-panel">
+      <div class="brand-block">
+        <div class="brand-mark">J</div>
+        <div><p class="eyebrow">Account recovery</p><h1>JetFlow</h1></div>
+      </div>
+      <form id="reset-request-form" class="auth-form">
+        <div class="form-heading">
+          <h2>Forgot password?</h2>
+          <p>Enter your email and we will send a secure reset link.</p>
+        </div>
+        <label for="email">Email</label>
+        <input type="email" id="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+        <button type="submit">Send reset link</button>
+        <p class="auth-link"><a href="index.html">Back to login</a></p>
+      </form>
+    </div>
+  </div>
+  <script src="auth-feedback.js"></script>
+  <script src="reset-request.js"></script>
+</body>
+</html>
