@@ -97,7 +97,10 @@ app.post('/api/register', async (req, res) => {
   ).run(name, email, hashedPassword);
 
   req.session.userId = result.lastInsertRowid;
-  res.status(201).json({ id: result.lastInsertRowid, name, email });
+  req.session.save(error => {
+    if (error) return res.status(500).json({ error: 'Could not create a login session.' });
+    res.status(201).json({ id: result.lastInsertRowid, name, email });
+  });
 });
 
 app.post('/api/login', async (req, res) => {
@@ -113,7 +116,10 @@ app.post('/api/login', async (req, res) => {
   if (!passwordMatches) return res.status(401).json({ error: 'Invalid email or password' });
 
   req.session.userId = user.id;
-  res.json({ id: user.id, name: user.name, email: user.email });
+  req.session.save(error => {
+    if (error) return res.status(500).json({ error: 'Could not create a login session.' });
+    res.json({ id: user.id, name: user.name, email: user.email });
+  });
 });
 
 app.post('/api/forgot-password', async (req, res) => {

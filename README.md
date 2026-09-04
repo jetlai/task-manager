@@ -48,5 +48,3 @@ RESEND_API_KEY=re_xxxxxxxxx
 RESEND_FROM=JetFlow <no-reply@your-verified-domain.com>
 SESSION_SECRET=use-a-long-random-secret
 ```
-
-Brevo is another free provider with a daily allowance. Reset links are stored as hashes, expire after one hour, and can only be used once. The request endpoint returns the same response whether or not an email belongs to an account.
